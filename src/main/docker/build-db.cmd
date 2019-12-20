@@ -1,0 +1,1 @@
+docker build -f DockerFile-PostgreSQL -t ww/betcapture-db .
