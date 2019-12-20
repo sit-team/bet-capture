@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="com.igt.ww.betcapture ITs" type="JUnit" factoryName="JUnit">
-    <module name="betcapture-live" />
+    <module name="betcapture" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="com.igt.ww.betcapture.*" />

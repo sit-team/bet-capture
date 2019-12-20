@@ -4,9 +4,9 @@
       <settings>
         <option name="buildCliOptions" value="" />
         <option name="command" value="" />
-        <option name="containerName" value="betcapturelive" />
+        <option name="containerName" value="betcapture" />
         <option name="entrypoint" value="" />
-        <option name="imageTag" value="ww/betcapturelive" />
+        <option name="imageTag" value="ww/betcapture" />
         <option name="portBindings">
           <list>
             <DockerPortBindingImpl>
