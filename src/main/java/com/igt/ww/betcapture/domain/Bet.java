@@ -12,12 +12,12 @@ import static javax.persistence.FetchType.*;
 @Table(name = "bet")
 public class Bet {
 
-	@Id @Column(name = "bet_id") private long id;
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "bet_id") private long id;
 	@Column(name = "external_id") private String externalId;
 	@Enumerated(EnumType.STRING) @Column(name = "state") private BetState state;
 	@Column(name = "stake") private BigDecimal stake;
 	@Column(name = "max_return") private BigDecimal maxReturn;
-	@OneToMany(mappedBy = "bet", fetch = EAGER, cascade = {ALL}) @OrderBy("id.legIndex") private List<BetLeg> legs = new ArrayList<>();;
+	@OneToMany(mappedBy = "id.bet", fetch = EAGER, cascade = {ALL}) @OrderBy("id.legIndex") private List<BetLeg> legs = new ArrayList<>();;
 	@Column(name = "timestamp") private LocalDateTime timestamp;
 	@Version @Column(name = "version") private int version;
 
@@ -69,6 +69,11 @@ public class Bet {
 		this.legs = legs;
 	}
 
+	public void addLeg(BetLeg leg) {
+		legs.add(leg);
+		leg.setBet(this);
+	}
+
 	public LocalDateTime getTimestamp() {
 		return timestamp;
 	}
@@ -83,11 +88,5 @@ public class Bet {
 
 	public void setVersion(int version) {
 		this.version = version;
-	}
-
-	@PostPersist
-	private void postPersist() {
-		for (BetLeg leg : legs)
-			leg.setBetId(id);
 	}
 }

@@ -7,22 +7,26 @@ import javax.persistence.*;
 @Embeddable
 public class BetLegId implements Serializable {
 
-	private long betId;
-	private int legIndex;
+	@ManyToOne @JoinColumn(name = "bet_id") private Bet bet;
+	@Column(name = "leg_index") private int legIndex;
 
 	public BetLegId() {}
 
-	public BetLegId(long betId, int legIndex) {
-		this.betId = betId;
+	public BetLegId(Bet bet, int legIndex) {
+		this.bet = bet;
 		this.legIndex = legIndex;
 	}
 
-	public long getBetId() {
-		return betId;
+	public Bet getBet() {
+		return bet;
 	}
 
-	public void setBetId(long betId) {
-		this.betId = betId;
+	public void setBet(Bet bet) {
+		this.bet = bet;
+	}
+
+	public long getBetId() {
+		return bet.getId();
 	}
 
 	public int getLegIndex() {
@@ -37,16 +41,16 @@ public class BetLegId implements Serializable {
 		if (this == o) return true;
 		if (!(o instanceof BetLegId)) return false;
 		var id = (BetLegId) o;
-		return betId == id.betId && legIndex == id.legIndex;
+		return getBetId() == id.getBetId() && legIndex == id.legIndex;
 	}
 
 	@Override public int hashCode() {
-		return Objects.hash(betId, legIndex);
+		return Objects.hash(getBetId(), legIndex);
 	}
 
 	@Override public String toString() {
 		return "BetLegId{" +
-			"betId=" + betId +
+			"betId=" + getBetId() +
 			", legIndex=" + legIndex +
 			'}';
 	}
