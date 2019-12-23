@@ -17,7 +17,7 @@ public class Bet {
 	@Enumerated(EnumType.STRING) @Column(name = "state") private BetState state;
 	@Column(name = "stake") private BigDecimal stake;
 	@Column(name = "max_return") private BigDecimal maxReturn;
-	@OneToMany(mappedBy = "bet", fetch = EAGER, cascade = {ALL}) @OrderBy("id.legIndex") private List<BetLeg> legs;
+	@OneToMany(mappedBy = "bet", fetch = EAGER, cascade = {ALL}) @OrderBy("id.legIndex") private List<BetLeg> legs = new ArrayList<>();;
 	@Column(name = "timestamp") private LocalDateTime timestamp;
 	@Version @Column(name = "version") private int version;
 
@@ -83,5 +83,11 @@ public class Bet {
 
 	public void setVersion(int version) {
 		this.version = version;
+	}
+
+	@PostPersist
+	private void postPersist() {
+		for (BetLeg leg : legs)
+			leg.setBetId(id);
 	}
 }

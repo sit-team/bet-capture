@@ -39,6 +39,11 @@ class BetRepositoryIT {
 		bet.setStake(new BigDecimal("10"));
 		bet.setMaxReturn(new BigDecimal("20"));
 		bet.setTimestamp(LocalDateTime.now());
+		BetLeg leg = new BetLeg(bet, 1);
+		leg.setEventId(1L);
+		leg.setMarketId(11L);
+		leg.setSelectionId(111L);
+		leg.setPrice(new BigDecimal("2.1"));
 		return bet;
 	}
 

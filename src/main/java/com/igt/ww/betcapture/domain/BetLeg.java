@@ -21,6 +21,7 @@ public class BetLeg {
 	public BetLeg(Bet bet, int legIndex) {
 		betId = bet.getId();
 		this.legIndex = legIndex;
+		bet.getLegs().add(this);
 	}
 
 	public long getBetId() {

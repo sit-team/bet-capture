@@ -12,10 +12,10 @@ CREATE INDEX ON bet (external_id);
 
 CREATE TABLE bet_leg (
 	bet_id BIGINT NOT NULL REFERENCES bet (bet_id),
-	lex_index INTEGER NOT NULL,
+	leg_index INTEGER NOT NULL,
 	event_id BIGINT NOT NULL,
 	market_id BIGINT NOT NULL,
 	selection_id BIGINT NOT NULL,
    price NUMERIC NOT NULL,
-	PRIMARY KEY (bet_id, lex_index)
+	PRIMARY KEY (bet_id, leg_index)
 );
