@@ -1,0 +1,1 @@
+docker build -f DockerFile-Prometheus -t ww/betcapture-prometheus .

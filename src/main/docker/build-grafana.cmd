@@ -1,0 +1,1 @@
+docker build -f DockerFile-Grafana -t ww/betcapture-grafana .

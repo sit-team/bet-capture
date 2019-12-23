@@ -1,0 +1,3 @@
+FROM grafana/grafana
+
+ADD src/main/grafana/datasource.yaml /etc/grafana/provisioning/datasources

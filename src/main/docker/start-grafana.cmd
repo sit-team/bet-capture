@@ -1,0 +1,1 @@
+docker run -p 3000:3000 --name grafana -h grafana -d ww/betcapture-grafana

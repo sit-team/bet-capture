@@ -1,0 +1,3 @@
+FROM prom/prometheus
+
+ADD src/main/prometheus/prometheus.yml /etc/prometheus/
