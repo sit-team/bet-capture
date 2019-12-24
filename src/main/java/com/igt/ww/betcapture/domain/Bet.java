@@ -21,6 +21,14 @@ public class Bet {
 	@Column(name = "timestamp") private LocalDateTime timestamp;
 	@Version @Column(name = "version") private int version;
 
+	public void addLeg(BetLeg betLeg) {
+		legs.add(betLeg);
+	}
+
+	public void calculateMaxReturn() {
+		maxReturn = stake.multiply(legs.stream().map(BetLeg::getPrice).reduce(BigDecimal.ONE, BigDecimal::multiply));
+	}
+
 	public long getId() {
 		return id;
 	}
@@ -69,11 +77,6 @@ public class Bet {
 		this.legs = legs;
 	}
 
-	public void addLeg(BetLeg leg) {
-		legs.add(leg);
-		leg.setBet(this);
-	}
-
 	public LocalDateTime getTimestamp() {
 		return timestamp;
 	}
@@ -88,5 +91,11 @@ public class Bet {
 
 	public void setVersion(int version) {
 		this.version = version;
+	}
+
+	@PostPersist
+	private void postPersist() {
+		for (BetLeg leg : legs)
+			leg.setBetId(id);
 	}
 }
