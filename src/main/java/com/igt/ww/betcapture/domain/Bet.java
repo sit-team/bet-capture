@@ -1,12 +1,13 @@
 package com.igt.ww.betcapture.domain;
 
-import java.math.*;
-import java.time.*;
-import java.util.*;
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-import static javax.persistence.CascadeType.*;
-import static javax.persistence.FetchType.*;
+import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.FetchType.EAGER;
 
 @Entity
 @Table(name = "bet")
@@ -17,12 +18,13 @@ public class Bet {
 	@Enumerated(EnumType.STRING) @Column(name = "state") private BetState state;
 	@Column(name = "stake") private BigDecimal stake;
 	@Column(name = "max_return") private BigDecimal maxReturn;
-	@OneToMany(mappedBy = "id.bet", fetch = EAGER, cascade = {ALL}) @OrderBy("id.legIndex") private List<BetLeg> legs = new ArrayList<>();;
+	@OneToMany(mappedBy = "id.bet", fetch = EAGER, cascade = {ALL}) @OrderBy("id.legIndex") private List<BetLeg> legs = new ArrayList<>();
 	@Column(name = "timestamp") private LocalDateTime timestamp;
 	@Version @Column(name = "version") private int version;
 
 	public void addLeg(BetLeg betLeg) {
 		legs.add(betLeg);
+		betLeg.setBet(this);
 	}
 
 	public void calculateMaxReturn() {
@@ -91,11 +93,5 @@ public class Bet {
 
 	public void setVersion(int version) {
 		this.version = version;
-	}
-
-	@PostPersist
-	private void postPersist() {
-		for (BetLeg leg : legs)
-			leg.setBetId(id);
 	}
 }

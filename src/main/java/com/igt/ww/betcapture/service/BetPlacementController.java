@@ -11,20 +11,18 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toUnmodifiableList;
 
 @RestController
 @RequestMapping("/bet")
-public class BetPlacementResource {
+public class BetPlacementController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(BetPlacementResource.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BetPlacementController.class);
 
     private BetPlacementService betPlacementService;
 
-    public BetPlacementResource(BetPlacementService betPlacementService) {
+    public BetPlacementController(BetPlacementService betPlacementService) {
         this.betPlacementService = betPlacementService;
     }
 
@@ -33,11 +31,9 @@ public class BetPlacementResource {
         try {
             final boolean valid = validateBetRequest(betRequestInfo);
             if (!valid) {
-                return ResponseEntity.badRequest().body("Bet request is not populated!");
+                return ResponseEntity.badRequest().body(new ErrorInfo("Bet request is not populated!"));
             }
-
-            final Bet bet = betPlacementService.placeBet(toBet(betRequestInfo));
-
+            var bet = betPlacementService.placeBet(toBet(betRequestInfo));
             return ResponseEntity.ok(toBetInfo(bet));
         } catch (Throwable e) {
             LOG.error("Error happened during bet placement for {}!", betRequestInfo, e);
@@ -50,6 +46,7 @@ public class BetPlacementResource {
         try {
             return ResponseEntity.ok(betPlacementService.getAllBets().stream().map(this::toBetInfo).collect(toUnmodifiableList()));
         } catch (Exception e) {
+            LOG.error("Error while retrieving all bets!", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
@@ -83,19 +80,20 @@ public class BetPlacementResource {
         bet.setExternalId(betRequestInfo.getExternalId());
         bet.setStake(betRequestInfo.getStake());
         bet.setState(BetState.ATTEMPTED);
-        final List<BetLegInfo> betLegInfos = betRequestInfo.getBetLegInfos();
+        var betLegInfos = betRequestInfo.getBetLegInfos();
         for (int i = 0; i < betLegInfos.size(); i++) {
-            createBegLeg(bet, betLegInfos.get(i), i);
+            bet.addLeg(createBegLeg(betLegInfos.get(i), i));
         }
         return bet;
     }
 
-    private void createBegLeg(Bet bet, BetLegInfo betLegInfo, int i) {
-        BetLeg betLeg = new BetLeg(bet, i);
+    private BetLeg createBegLeg(BetLegInfo betLegInfo, int i) {
+        BetLeg betLeg = new BetLeg(i);
         betLeg.setEventId(betLegInfo.getEventId());
         betLeg.setMarketId(betLegInfo.getMarketId());
         betLeg.setSelectionId(betLegInfo.getSelectionId());
         betLeg.setPrice(betLegInfo.getPrice());
+        return betLeg;
     }
 
     private boolean validateBetRequest(BetRequestInfo betRequestInfo) {

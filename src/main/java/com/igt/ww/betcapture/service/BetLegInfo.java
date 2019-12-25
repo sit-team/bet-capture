@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 })
 public class BetLegInfo {
 
-    @JsonProperty(value = "legIndex", required = true)
+    @JsonProperty(value = "legIndex", required = false)
     private int legIndex;
     @JsonProperty(value = "eventId", required = true)
     private long eventId;
