@@ -115,8 +115,7 @@ class BetPlacementIT {
         Bet bet2 = BetBuilder.aBet().withId(2L).withState(BetState.CLOSED).build();
         when(betRepository.findAll()).thenReturn(List.of(bet1, bet2));
 
-        ResponseEntity<List<BetInfo>> betInfosResponse = restTemplate.exchange(RETRIEVE_BETS_URL, HttpMethod.GET, null, new ParameterizedTypeReference<>() {
-        });
+        ResponseEntity<List<BetInfo>> betInfosResponse = restTemplate.exchange(RETRIEVE_BETS_URL, HttpMethod.GET, null, new ParameterizedTypeReference<List<BetInfo>>() {});
 
         assertThat(betInfosResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
         List<BetInfo> betInfos = betInfosResponse.getBody();
