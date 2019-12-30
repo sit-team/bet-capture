@@ -1,8 +1,5 @@
-package com.igt.ww.betcapture.core;
+package com.igt.ww.betcapture.domain;
 
-import com.igt.ww.betcapture.domain.Bet;
-import com.igt.ww.betcapture.domain.BetRepository;
-import com.igt.ww.betcapture.domain.BetState;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

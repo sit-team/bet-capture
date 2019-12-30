@@ -1,6 +1,6 @@
 package com.igt.ww.betcapture.service;
 
-import com.igt.ww.betcapture.core.BetPlacementService;
+import com.igt.ww.betcapture.domain.BetPlacementService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;

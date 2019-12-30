@@ -8,7 +8,6 @@ import org.springframework.stereotype.*;
 
 import com.igt.ww.betcapture.domain.*;
 import io.micrometer.core.instrument.*;
-import io.micrometer.core.instrument.Timer;
 
 @Component
 @Profile("!dev")

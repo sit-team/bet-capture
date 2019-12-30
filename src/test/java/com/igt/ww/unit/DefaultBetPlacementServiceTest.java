@@ -1,6 +1,6 @@
 package com.igt.ww.unit;
 
-import com.igt.ww.betcapture.core.DefaultBetPlacementService;
+import com.igt.ww.betcapture.domain.DefaultBetPlacementService;
 import com.igt.ww.betcapture.domain.Bet;
 import com.igt.ww.betcapture.domain.BetRepository;
 import com.igt.ww.betcapture.domain.BetState;
