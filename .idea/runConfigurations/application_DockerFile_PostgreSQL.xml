@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="DockerFile-PostgreSQL" type="docker-deploy" factoryName="dockerfile" server-name="Docker">
+  <configuration default="false" name="application/DockerFile-PostgreSQL" type="docker-deploy" factoryName="dockerfile" server-name="Docker">
     <deployment type="dockerfile">
       <settings>
         <option name="buildCliOptions" value="" />
@@ -16,7 +16,7 @@
           </list>
         </option>
         <option name="commandLineOptions" value="" />
-        <option name="sourceFilePath" value="DockerFile-PostgreSQL" />
+        <option name="sourceFilePath" value="application/DockerFile-PostgreSQL" />
       </settings>
     </deployment>
     <method v="2" />

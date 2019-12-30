@@ -15,7 +15,6 @@ import org.springframework.boot.test.mock.mockito.*;
 import org.springframework.boot.test.web.client.*;
 import org.springframework.core.*;
 import org.springframework.http.*;
-import org.springframework.test.context.*;
 
 import com.igt.ww.betcapture.domain.*;
 import com.igt.ww.betcapture.service.*;
@@ -28,7 +27,6 @@ import static org.mockito.Mockito.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @EnableAutoConfiguration(exclude = DataSourceAutoConfiguration.class)
-@ActiveProfiles("test")
 class BetPlacementIT {
 
     private static final String BET_PLACE_URL = "/bet/place";
