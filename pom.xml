@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.igt.ww.betcapture</groupId>
-	<artifactId>project</artifactId>
+	<artifactId>betcapture</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>BetCapture aggregator project</name>
@@ -13,14 +13,43 @@
 		<java.version>11</java.version>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
-		<spring-bootversion>2.2.2.RELEASE</spring-bootversion>
+		<spring-boot.version>2.2.2.RELEASE</spring-boot.version>
+		<feign.version>10.7.0</feign.version>
 		<testcontainers.postgresql.version>1.12.4</testcontainers.postgresql.version>
 	</properties>
 
 	<modules>
-<!--		<module>api</module>-->
+		<module>api</module>
 		<module>application</module>
-<!--		<module>client</module>-->
+		<module>client</module>
 	</modules>
+
+	<dependencyManagement>
+		<dependencies>
+
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${spring-boot.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>com.igt.ww.betcapture</groupId>
+				<artifactId>api</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.igt.ww.betcapture</groupId>
+				<artifactId>api</artifactId>
+				<type>test-jar</type>
+				<version>${project.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
 
 </project>

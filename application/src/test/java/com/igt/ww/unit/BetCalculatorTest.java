@@ -1,8 +1,8 @@
 package com.igt.ww.unit;
 
 import com.igt.ww.betcapture.domain.Bet;
-import com.igt.ww.builder.BetBuilder;
-import com.igt.ww.builder.BetLegBuilder;
+import com.igt.ww.betcapture.builder.BetBuilder;
+import com.igt.ww.betcapture.builder.BetLegBuilder;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;

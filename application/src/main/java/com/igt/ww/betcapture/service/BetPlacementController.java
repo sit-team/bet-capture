@@ -1,18 +1,19 @@
 package com.igt.ww.betcapture.service;
 
-import com.igt.ww.betcapture.domain.BetPlacementService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.MediaType;
+import java.util.*;
+
+import org.slf4j.*;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import com.igt.ww.betcapture.api.*;
+import com.igt.ww.betcapture.domain.*;
 
-import static java.util.stream.Collectors.toUnmodifiableList;
+import static java.util.stream.Collectors.*;
 
 @RestController
 @RequestMapping("/bet")
-public class BetPlacementController {
+public class BetPlacementController implements BetPlacementAPI {
 
     private static final Logger LOG = LoggerFactory.getLogger(BetPlacementController.class);
 
@@ -23,7 +24,7 @@ public class BetPlacementController {
     }
 
     @PostMapping(value = "/place", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public BetInfo placeBet(@RequestBody BetRequestInfo betRequestInfo) {
+    @Override public BetInfo placeBet(@RequestBody BetRequestInfo betRequestInfo) {
         LOG.trace("placeBet({})", betRequestInfo);
         validateBetRequest(betRequestInfo);
         var bet = betPlacementService.placeBet(BetAssembler.toBet(betRequestInfo));
@@ -31,7 +32,7 @@ public class BetPlacementController {
     }
 
     @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<BetInfo> getAllBets() {
+    @Override public List<BetInfo> getAllBets() {
         LOG.trace("getAllBets");
         return betPlacementService.getAllBets().stream().map(BetAssembler::toBetInfo).collect(toUnmodifiableList());
     }

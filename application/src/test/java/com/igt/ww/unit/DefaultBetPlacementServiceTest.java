@@ -4,7 +4,7 @@ import com.igt.ww.betcapture.domain.DefaultBetPlacementService;
 import com.igt.ww.betcapture.domain.Bet;
 import com.igt.ww.betcapture.domain.BetRepository;
 import com.igt.ww.betcapture.domain.BetState;
-import com.igt.ww.builder.BetBuilder;
+import com.igt.ww.betcapture.builder.BetBuilder;
 import org.assertj.core.data.Index;
 import org.assertj.core.data.Offset;
 import org.junit.jupiter.api.Test;

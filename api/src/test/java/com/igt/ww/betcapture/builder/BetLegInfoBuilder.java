@@ -1,6 +1,6 @@
-package com.igt.ww.builder;
+package com.igt.ww.betcapture.builder;
 
-import com.igt.ww.betcapture.service.BetLegInfo;
+import com.igt.ww.betcapture.api.BetLegInfo;
 
 import java.math.BigDecimal;
 

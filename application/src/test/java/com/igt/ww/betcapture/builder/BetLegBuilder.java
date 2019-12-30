@@ -1,4 +1,4 @@
-package com.igt.ww.builder;
+package com.igt.ww.betcapture.builder;
 
 import com.igt.ww.betcapture.domain.BetLeg;
 import com.igt.ww.betcapture.domain.BetLegId;

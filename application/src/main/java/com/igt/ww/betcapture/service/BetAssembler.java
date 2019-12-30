@@ -1,5 +1,6 @@
 package com.igt.ww.betcapture.service;
 
+import com.igt.ww.betcapture.api.*;
 import com.igt.ww.betcapture.domain.Bet;
 import com.igt.ww.betcapture.domain.BetLeg;
 import com.igt.ww.betcapture.domain.BetState;

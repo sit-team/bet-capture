@@ -16,9 +16,10 @@ import org.springframework.boot.test.web.client.*;
 import org.springframework.core.*;
 import org.springframework.http.*;
 
+import com.igt.ww.betcapture.api.*;
+import com.igt.ww.betcapture.builder.*;
 import com.igt.ww.betcapture.domain.*;
-import com.igt.ww.betcapture.service.*;
-import com.igt.ww.builder.*;
+import com.igt.ww.betcapture.maker.*;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.data.Index.atIndex;
@@ -47,7 +48,7 @@ class BetPlacementIT {
     void singleBetWillBeSuccessfullyPlaced() {
         when(betRepository.save(any(Bet.class))).then(BetPlacementIT::saveBet);
 
-        BetRequestInfo betRequestInfo = makeSingleBetRequest();
+        BetRequestInfo betRequestInfo = BetRequestInfoMaker.makeSingleBetRequest();
         ResponseEntity<BetInfo> betInfoResponse = restTemplate.postForEntity(BET_PLACE_URL, betRequestInfo, BetInfo.class);
 
         assertThat(betInfoResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -65,7 +66,7 @@ class BetPlacementIT {
             return argument;
         });
 
-        BetRequestInfo betRequestInfo = makeMultipleBetRequest();
+        BetRequestInfo betRequestInfo = BetRequestInfoMaker.makeMultipleBetRequest();
         ResponseEntity<BetInfo> betInfoResponse = restTemplate.postForEntity(BET_PLACE_URL, betRequestInfo, BetInfo.class);
 
         assertThat(betInfoResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -102,39 +103,6 @@ class BetPlacementIT {
         ErrorInfo errorInfo = betInfoResponse.getBody();
         assertThat(errorInfo).isInstanceOf(ErrorInfo.class);
         assertThat(errorInfo.getMessage()).isNotNull().isNotBlank();
-    }
-
-    private BetRequestInfo makeSingleBetRequest() {
-        return BetRequestInfoBuilder
-                .aBetRequestInfo()
-                .withStake(BigDecimal.ONE)
-                .withExternalId("Bet1")
-                .withBetLegInfos(Collections.singletonList(
-                        BetLegInfoBuilder.aBetLegInfo()
-                                .withEventId(1L)
-                                .withMarketId(1L)
-                                .withSelectionId(1L)
-                                .withPrice(BigDecimal.TEN)
-                )).build();
-    }
-
-    private BetRequestInfo makeMultipleBetRequest() {
-        return BetRequestInfoBuilder
-                .aBetRequestInfo()
-                .withStake(BigDecimal.ONE)
-                .withExternalId("Bet1")
-                .withBetLegInfos(List.of(
-                        BetLegInfoBuilder.aBetLegInfo()
-                                .withEventId(1L)
-                                .withMarketId(1L)
-                                .withSelectionId(1L)
-                                .withPrice(BigDecimal.TEN),
-                        BetLegInfoBuilder.aBetLegInfo()
-                                .withEventId(2L)
-                                .withMarketId(2L)
-                                .withSelectionId(2L)
-                                .withPrice(BigDecimal.TEN)
-                )).build();
     }
 
 

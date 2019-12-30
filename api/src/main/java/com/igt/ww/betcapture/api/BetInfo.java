@@ -1,4 +1,4 @@
-package com.igt.ww.betcapture.service;
+package com.igt.ww.betcapture.api;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
