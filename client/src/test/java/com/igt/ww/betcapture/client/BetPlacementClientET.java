@@ -16,7 +16,7 @@ class BetPlacementClientET {
 
 	@BeforeAll
 	void setUp() {
-		client = BetPlacementClientFactory.client("http://localhost:8080");
+		client = BetPlacementClient.client("http://localhost:8080");
 	}
 
 	@Test

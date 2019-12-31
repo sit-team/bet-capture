@@ -13,9 +13,11 @@
 		<java.version>11</java.version>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring-boot.version>2.2.2.RELEASE</spring-boot.version>
 		<feign.version>10.7.0</feign.version>
 		<testcontainers.postgresql.version>1.12.4</testcontainers.postgresql.version>
+		<wiremock.version>2.25.1</wiremock.version>
 	</properties>
 
 	<modules>
@@ -46,6 +48,13 @@
 				<artifactId>api</artifactId>
 				<type>test-jar</type>
 				<version>${project.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>com.github.tomakehurst</groupId>
+				<artifactId>wiremock-jre8</artifactId>
+				<version>${wiremock.version}</version>
 				<scope>test</scope>
 			</dependency>
 

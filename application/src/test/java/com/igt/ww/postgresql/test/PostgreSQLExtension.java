@@ -24,7 +24,6 @@ public class PostgreSQLExtension implements TestInstancePostProcessor {
 
 	static class SharedPostgreSQLContainer extends PostgreSQLContainer implements ExtensionContext.Store.CloseableResource {
 
-
 		public SharedPostgreSQLContainer(String dockerImageName) {
 			super(dockerImageName);
 		}
