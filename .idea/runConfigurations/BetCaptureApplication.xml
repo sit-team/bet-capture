@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="BetCaptureApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
     <module name="application" />
-    <option name="SPRING_BOOT_MAIN_CLASS" value="com.igt.ww.betcapture.BetcaptureApplication" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="com.igt.ww.betcapture.BetCaptureApplication" />
     <option name="ALTERNATIVE_JRE_PATH" />
     <method v="2">
       <option name="Make" enabled="true" />

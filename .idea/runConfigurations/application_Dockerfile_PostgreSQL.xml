@@ -1,12 +1,12 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="application/DockerFile-PostgreSQL" type="docker-deploy" factoryName="dockerfile" server-name="Docker">
+  <configuration default="false" name="application/Dockerfile-PostgreSQL" type="docker-deploy" factoryName="dockerfile" server-name="Docker">
     <deployment type="dockerfile">
       <settings>
         <option name="buildCliOptions" value="" />
         <option name="command" value="" />
-        <option name="containerName" value="betcapture" />
+        <option name="containerName" value="betcapture-db" />
         <option name="entrypoint" value="" />
-        <option name="imageTag" value="ww/betcapture" />
+        <option name="imageTag" value="ww/betcapture-db" />
         <option name="portBindings">
           <list>
             <DockerPortBindingImpl>
@@ -16,7 +16,7 @@
           </list>
         </option>
         <option name="commandLineOptions" value="" />
-        <option name="sourceFilePath" value="application/DockerFile-PostgreSQL" />
+        <option name="sourceFilePath" value="application/Dockerfile-PostgreSQL" />
       </settings>
     </deployment>
     <method v="2" />
