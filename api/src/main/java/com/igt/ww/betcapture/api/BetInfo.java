@@ -1,50 +1,38 @@
 package com.igt.ww.betcapture.api;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import java.math.*;
+import java.time.*;
+import java.util.*;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.List;
+import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.*;
 
 @JsonPropertyOrder({
-        "id",
-        "externalId",
-        "betState",
-        "stake",
-        "maxReturn",
-        "timestamp",
-        "betLegs"
+   "id",
+   "externalId",
+   "betState",
+   "stake",
+   "maxReturn",
+   "timestamp",
+   "betLegs"
 })
 public class BetInfo {
 
-    @JsonProperty(value = "id", required = true)
+    @JsonProperty(value = "id", required = true) @Min(1L)
     private long id;
-    @JsonProperty(value = "externalId", required = false)
+    @JsonProperty(value = "externalId", required = true) @NotBlank @Size(min = 1, max = 50)
     private String externalId;
-    @JsonProperty(value = "state", required = true)
+    @JsonProperty(value = "state", required = true) @NotBlank @Size(min = 1, max = 20)
     private String betState;
-    @JsonProperty(value = "stake", required = true)
+    @JsonProperty(value = "stake", required = true) @NotNull @Min(0)
     private BigDecimal stake;
-    @JsonProperty(value = "maxReturn", required = true)
+    @JsonProperty(value = "maxReturn", required = true) @NotNull @Min(0)
     private BigDecimal maxReturn;
-    @JsonProperty(value = "timestamp", required = true)
+    @JsonProperty(value = "timestamp", required = true) @NotNull
     private LocalDateTime timestamp;
-    @JsonProperty(value = "betLegs", required = true)
+    @JsonProperty(value = "betLegs", required = true) @NotEmpty @Size(min = 1, max = 50)
     private List<BetLegInfo> betLegInfos;
-
-    @Override
-    public String toString() {
-        return "BetInfo{" +
-                "id=" + id +
-                ", externalId='" + externalId + '\'' +
-                ", betState='" + betState + '\'' +
-                ", stake=" + stake +
-                ", maxReturn=" + maxReturn +
-                ", timestamp=" + timestamp +
-                ", betLegInfos=" + betLegInfos +
-                '}';
-    }
 
     public long getId() {
         return id;
@@ -100,5 +88,17 @@ public class BetInfo {
 
     public void setBetLegInfos(List<BetLegInfo> betLegInfos) {
         this.betLegInfos = betLegInfos;
+    }
+
+    @Override public String toString() {
+        return "BetInfo{" +
+           "id=" + id +
+           ", externalId='" + externalId + '\'' +
+           ", betState='" + betState + '\'' +
+           ", stake=" + stake +
+           ", maxReturn=" + maxReturn +
+           ", timestamp=" + timestamp +
+           ", betLegInfos=" + betLegInfos +
+           '}';
     }
 }

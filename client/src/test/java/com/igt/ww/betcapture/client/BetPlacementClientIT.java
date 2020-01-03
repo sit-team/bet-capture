@@ -34,7 +34,7 @@ class BetPlacementClientIT {
 	@Test
 	void placeBet() throws JsonProcessingException {
 		BetInfo stubbedBet = makeSingleBet();
-		stubFor(post(urlEqualTo("/bet/place"))
+		stubFor(post(urlEqualTo("/v1/bet/place"))
 			.withHeader("Content-Type", equalTo("application/json"))
 			.willReturn(aResponse()
 				.withStatus(200)
@@ -48,7 +48,7 @@ class BetPlacementClientIT {
 
 	@Test
 	void placeBetIsFailed() throws JsonProcessingException {
-		stubFor(post(urlEqualTo("/bet/place"))
+		stubFor(post(urlEqualTo("/v1/bet/place"))
 			.withHeader("Content-Type", equalTo("application/json"))
 			.willReturn(aResponse()
 				.withStatus(500)
@@ -61,7 +61,7 @@ class BetPlacementClientIT {
 	@Test
 	void getBets() throws JsonProcessingException {
 		List<BetInfo> stubbedBets = List.of(makeSingleBet());
-		stubFor(get(urlEqualTo("/bet/all"))
+		stubFor(get(urlEqualTo("/v1/bet/all"))
 			.willReturn(aResponse()
 				.withStatus(200)
 				.withHeader("Content-Type", "application/json")
@@ -74,7 +74,7 @@ class BetPlacementClientIT {
 
 	@Test
 	void getEmptyBets() {
-		stubFor(get(urlEqualTo("/bet/all"))
+		stubFor(get(urlEqualTo("/v1/bet/all"))
 			.willReturn(aResponse()
 				.withStatus(200)
 				.withHeader("Content-Type", "application/json")

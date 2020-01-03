@@ -1,10 +1,9 @@
 package com.igt.ww.betcapture.api;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.*;
 
 @JsonPropertyOrder({
-        "message"
+   "message"
 })
 public class ErrorInfo {
 
@@ -23,5 +22,9 @@ public class ErrorInfo {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    @Override public String toString() {
+        return message;
     }
 }

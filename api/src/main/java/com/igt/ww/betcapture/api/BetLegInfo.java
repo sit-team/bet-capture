@@ -1,40 +1,30 @@
 package com.igt.ww.betcapture.api;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import java.math.*;
 
-import java.math.BigDecimal;
+import javax.validation.constraints.*;
+
+import com.fasterxml.jackson.annotation.*;
 
 @JsonPropertyOrder({
-        "legIndex",
-        "eventId",
-        "marketId",
-        "selectionId",
-        "price"
+   "legIndex",
+   "eventId",
+   "marketId",
+   "selectionId",
+   "price"
 })
 public class BetLegInfo {
 
-    @JsonProperty(value = "legIndex", required = false)
+    @JsonProperty(value = "legIndex", required = true) @Min(1)
     private int legIndex;
-    @JsonProperty(value = "eventId", required = true)
+    @JsonProperty(value = "eventId", required = true) @Min(1L)
     private long eventId;
-    @JsonProperty(value = "marketId", required = true)
+    @JsonProperty(value = "marketId", required = true) @Min(1L)
     private long marketId;
-    @JsonProperty(value = "selectionId", required = true)
+    @JsonProperty(value = "selectionId", required = true) @Min(1L)
     private long selectionId;
-    @JsonProperty(value = "price", required = true)
+    @JsonProperty(value = "price", required = true) @NotNull @Min(1)
     private BigDecimal price;
-
-    @Override
-    public String toString() {
-        return "BetLegInfo{" +
-                "legIndex=" + legIndex +
-                ", eventId=" + eventId +
-                ", marketId=" + marketId +
-                ", selectionId=" + selectionId +
-                ", price=" + price +
-                '}';
-    }
 
     public int getLegIndex() {
         return legIndex;
@@ -74,5 +64,15 @@ public class BetLegInfo {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    @Override public String toString() {
+        return "BetLegInfo{" +
+           "legIndex=" + legIndex +
+           ", eventId=" + eventId +
+           ", marketId=" + marketId +
+           ", selectionId=" + selectionId +
+           ", price=" + price +
+           '}';
     }
 }

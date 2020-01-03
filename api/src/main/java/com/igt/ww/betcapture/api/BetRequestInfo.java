@@ -1,35 +1,26 @@
 package com.igt.ww.betcapture.api;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import java.math.*;
+import java.util.*;
+import javax.validation.constraints.*;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
+import com.fasterxml.jackson.annotation.*;
 
 @JsonPropertyOrder({
-        "stake",
-        "betLegInfos"
+    "stake",
+    "externalId",
+    "betLegInfos"
 })
 public class BetRequestInfo {
 
-    @JsonProperty(value = "stake", required = true)
+    @JsonProperty(value = "stake", required = true) @NotNull @Min(0)
     private BigDecimal stake;
 
-    @JsonProperty(value = "externalId", required = false)
+    @JsonProperty(value = "externalId", required = true) @NotBlank @Size(min = 1, max = 50)
     private String externalId;
 
-    @JsonProperty(value = "betLegs", required = true)
+    @JsonProperty(value = "betLegs", required = true) @NotEmpty @Size(min = 1, max = 50)
     private List<BetLegInfo> betLegInfos = new ArrayList<>();
-
-    @Override
-    public String toString() {
-        return "BetRequestInfo{" +
-                "stake=" + stake +
-                ", externalId='" + externalId + '\'' +
-                ", betLegInfos=" + betLegInfos +
-                '}';
-    }
 
     public BigDecimal getStake() {
         return stake;
@@ -53,5 +44,13 @@ public class BetRequestInfo {
 
     public void setBetLegInfos(List<BetLegInfo> betLegInfos) {
         this.betLegInfos = betLegInfos;
+    }
+
+    @Override public String toString() {
+        return "BetRequestInfo{" +
+           "stake=" + stake +
+           ", externalId='" + externalId + '\'' +
+           ", betLegInfos=" + betLegInfos +
+           '}';
     }
 }

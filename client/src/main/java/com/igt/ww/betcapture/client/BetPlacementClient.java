@@ -10,11 +10,11 @@ import feign.jackson.*;
 
 public interface BetPlacementClient extends BetPlacementAPI {
 
-	@RequestLine("POST /bet/place")
+	@RequestLine("POST /v1/bet/place")
 	@Headers("Content-Type: application/json")
 	@Override BetInfo placeBet(BetRequestInfo betRequestInfo);
 
-	@RequestLine("GET /bet/all")
+	@RequestLine("GET /v1/bet/all")
 	@Override List<BetInfo> getAllBets();
 
 	static BetPlacementAPI client(String uri) {

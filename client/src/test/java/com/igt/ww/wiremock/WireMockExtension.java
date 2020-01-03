@@ -4,6 +4,7 @@ import org.junit.jupiter.api.extension.*;
 
 import com.github.tomakehurst.wiremock.*;
 import com.github.tomakehurst.wiremock.client.*;
+import com.github.tomakehurst.wiremock.core.*;
 
 public class WireMockExtension implements TestInstancePostProcessor, BeforeEachCallback, AfterEachCallback {
 
@@ -28,11 +29,11 @@ public class WireMockExtension implements TestInstancePostProcessor, BeforeEachC
 		store.getOrComputeIfAbsent("WireMockServer", k -> getWireMockServer());
 	}
 
-	@Override public void beforeEach(ExtensionContext extensionContext) throws Exception {
+	@Override public void beforeEach(ExtensionContext extensionContext) {
 		WireMock.configureFor(server.port());
 	}
 
-	@Override public void afterEach(ExtensionContext extensionContext) throws Exception {
+	@Override public void afterEach(ExtensionContext extensionContext) {
 		WireMock.reset();
 	}
 
@@ -40,7 +41,7 @@ public class WireMockExtension implements TestInstancePostProcessor, BeforeEachC
 
 
 		public SharedWireMockServer() {
-			super();
+			super(WireMockConfiguration.options().dynamicPort());
 		}
 
 		@Override public void close() {

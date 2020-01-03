@@ -12,7 +12,7 @@ import com.igt.ww.betcapture.domain.*;
 import static java.util.stream.Collectors.*;
 
 @RestController
-@RequestMapping("/bet")
+@RequestMapping("/v1/bet")
 public class BetPlacementController implements BetPlacementAPI {
 
     private static final Logger LOG = LoggerFactory.getLogger(BetPlacementController.class);

@@ -8,8 +8,11 @@ import com.igt.ww.betcapture.api.*;
 import com.igt.ww.betcapture.maker.*;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.jupiter.api.MethodOrderer.*;
+import static org.junit.jupiter.api.TestInstance.*;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@TestInstance(Lifecycle.PER_CLASS)
+@TestMethodOrder(OrderAnnotation.class)
 class BetPlacementClientET {
 
 	private BetPlacementAPI client;
@@ -19,7 +22,7 @@ class BetPlacementClientET {
 		client = BetPlacementClient.client("http://localhost:8080");
 	}
 
-	@Test
+	@Test @Order(1)
 	void placeBet() {
 		BetInfo bet = client.placeBet(BetRequestInfoMaker.makeSingleBetRequest());
 
@@ -27,7 +30,7 @@ class BetPlacementClientET {
 		assertThat(bet.getExternalId()).isNotEmpty();
 	}
 
-	@Test
+	@Test @Order(2)
 	void getAllBets() {
 		List<BetInfo> bets = client.getAllBets();
 

@@ -30,8 +30,8 @@ import static org.mockito.Mockito.*;
 @EnableAutoConfiguration(exclude = DataSourceAutoConfiguration.class)
 class BetPlacementIT {
 
-    private static final String BET_PLACE_URL = "/bet/place";
-    private static final String RETRIEVE_BETS_URL = "/bet/all";
+    private static final String BET_PLACE_URL = "/v1/bet/place";
+    private static final String RETRIEVE_BETS_URL = "/v1/bet/all";
 
     @Autowired
     private TestRestTemplate restTemplate;
