@@ -27,7 +27,7 @@ class DefaultBetPlacementServiceTest {
     private BetRepository betRepository;
 
     @InjectMocks
-    private DefaultBetPlacementService defaultBetPlacementService;
+    private DefaultBetPlacementService betPlacementService;
 
     @Test
     void placeBet() {
@@ -38,7 +38,7 @@ class DefaultBetPlacementServiceTest {
         });
 
         Bet bet = BetBuilder.defaultBet().build();
-        Bet resultBet = defaultBetPlacementService.placeBet(bet);
+        Bet resultBet = betPlacementService.placeBet(bet);
 
         assertThat(resultBet.getId()).isEqualTo(1L);
         assertThat(resultBet.getTimestamp()).isNotNull();
@@ -52,7 +52,7 @@ class DefaultBetPlacementServiceTest {
         Bet bet2 = BetBuilder.aBet().withId(2L).build();
         given(betRepository.findAll()).willReturn(List.of(bet1, bet2));
 
-        List<Bet> allBets = defaultBetPlacementService.getAllBets();
+        List<Bet> allBets = betPlacementService.getAllBets();
 
         assertThat(allBets.size()).isEqualTo(2);
         assertThat(allBets).extracting(Bet::getId).contains(1L, Index.atIndex(0)).contains(2L, Index.atIndex(1));

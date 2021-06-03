@@ -45,7 +45,7 @@ public class WireMockExtension implements TestInstancePostProcessor, BeforeEachC
 		}
 
 		@Override public void close() {
-			super.stop();
+			stop();
 		}
 	}
 }
