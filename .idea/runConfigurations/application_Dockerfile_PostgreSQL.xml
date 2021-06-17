@@ -2,11 +2,16 @@
   <configuration default="false" name="application/Dockerfile-PostgreSQL" type="docker-deploy" factoryName="dockerfile" server-name="Docker">
     <deployment type="dockerfile">
       <settings>
-        <option name="buildCliOptions" value="" />
-        <option name="command" value="" />
-        <option name="containerName" value="betcapture-db" />
-        <option name="entrypoint" value="" />
         <option name="imageTag" value="ww/betcapture-db" />
+        <option name="containerName" value="betcapture-db" />
+        <option name="envVars">
+          <list>
+            <DockerEnvVarImpl>
+              <option name="name" value="POSTGRES_PASSWORD" />
+              <option name="value" value="postgres" />
+            </DockerEnvVarImpl>
+          </list>
+        </option>
         <option name="portBindings">
           <list>
             <DockerPortBindingImpl>
@@ -15,7 +20,6 @@
             </DockerPortBindingImpl>
           </list>
         </option>
-        <option name="commandLineOptions" value="" />
         <option name="sourceFilePath" value="application/Dockerfile-PostgreSQL" />
       </settings>
     </deployment>

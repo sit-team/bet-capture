@@ -24,7 +24,7 @@ class BetPlacementClientET {
 
 	@Test @Order(1)
 	void placeBet() {
-		BetInfo bet = client.placeBet(BetRequestInfoMaker.makeSingleBetRequest());
+		var bet = client.placeBet(BetRequestInfoMaker.makeSingleBetRequest());
 
 		assertThat(bet.getId()).isPositive();
 		assertThat(bet.getExternalId()).isNotEmpty();
@@ -32,7 +32,7 @@ class BetPlacementClientET {
 
 	@Test @Order(2)
 	void getAllBets() {
-		List<BetInfo> bets = client.getAllBets();
+		var bets = client.getAllBets();
 
 		assertThat(bets).isNotEmpty();
 	}

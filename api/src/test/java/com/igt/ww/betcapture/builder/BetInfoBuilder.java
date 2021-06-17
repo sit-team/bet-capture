@@ -51,7 +51,7 @@ public final class BetInfoBuilder {
     }
 
     public BetInfo build() {
-        BetInfo betInfo = new BetInfo();
+        var betInfo = new BetInfo();
         betInfo.setId(id);
         betInfo.setBetState(betState);
         betInfo.setStake(stake);

@@ -33,7 +33,7 @@ class BetPlacementClientIT {
 
 	@Test
 	void placeBet() throws JsonProcessingException {
-		BetInfo stubbedBet = makeSingleBet();
+		var stubbedBet = makeSingleBet();
 		stubFor(post(urlEqualTo("/v1/bet/place"))
 			.withHeader("Content-Type", equalTo("application/json"))
 			.willReturn(aResponse()
@@ -41,7 +41,7 @@ class BetPlacementClientIT {
 				.withHeader("Content-Type", "application/json")
 				.withBody(mapper.writeValueAsString(stubbedBet))));
 
-		BetInfo bet = client.placeBet(makeSingleBetRequest());
+		var bet = client.placeBet(makeSingleBetRequest());
 
 		assertThat(bet).usingRecursiveComparison().isEqualTo(stubbedBet);
 	}
@@ -60,14 +60,14 @@ class BetPlacementClientIT {
 
 	@Test
 	void getBets() throws JsonProcessingException {
-		List<BetInfo> stubbedBets = List.of(makeSingleBet());
+		var stubbedBets = List.of(makeSingleBet());
 		stubFor(get(urlEqualTo("/v1/bet/all"))
 			.willReturn(aResponse()
 				.withStatus(200)
 				.withHeader("Content-Type", "application/json")
 				.withBody(mapper.writeValueAsString(stubbedBets))));
 
-		List<BetInfo> bets = client.getAllBets();
+		var bets = client.getAllBets();
 
 		assertThat(bets).usingRecursiveFieldByFieldElementComparator().isEqualTo(stubbedBets);
 	}
@@ -80,7 +80,7 @@ class BetPlacementClientIT {
 				.withHeader("Content-Type", "application/json")
 				.withBody("[]")));
 
-		List<BetInfo> bets = client.getAllBets();
+		var bets = client.getAllBets();
 
 		assertThat(bets).isEmpty();
 	}

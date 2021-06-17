@@ -40,7 +40,7 @@ public final class BetRequestInfoBuilder {
     }
 
     public BetRequestInfo build() {
-        BetRequestInfo betRequestInfo = new BetRequestInfo();
+        var betRequestInfo = new BetRequestInfo();
         betRequestInfo.setStake(stake);
         betRequestInfo.setExternalId(externalId);
         betRequestInfo.setBetLegInfos(betLegInfos.stream().map(BetLegInfoBuilder::build).collect(toList()));

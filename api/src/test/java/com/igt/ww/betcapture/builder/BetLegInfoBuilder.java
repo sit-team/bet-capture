@@ -49,7 +49,7 @@ public final class BetLegInfoBuilder {
     }
 
     public BetLegInfo build() {
-        BetLegInfo betLegInfo = new BetLegInfo();
+        var betLegInfo = new BetLegInfo();
         betLegInfo.setLegIndex(legIndex);
         betLegInfo.setEventId(eventId);
         betLegInfo.setMarketId(marketId);

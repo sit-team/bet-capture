@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 class BetAssembler {
 
     static BetInfo toBetInfo(Bet bet) {
-        BetInfo betInfo = new BetInfo();
+        var betInfo = new BetInfo();
         betInfo.setId(bet.getId());
         betInfo.setExternalId(bet.getExternalId());
         betInfo.setBetState(bet.getState().name());
@@ -24,7 +24,7 @@ class BetAssembler {
     }
 
     private static BetLegInfo toBetLegInfo(BetLeg betLeg) {
-        BetLegInfo betLegInfo = new BetLegInfo();
+        var betLegInfo = new BetLegInfo();
         betLegInfo.setLegIndex(betLeg.getLegIndex());
         betLegInfo.setEventId(betLeg.getEventId());
         betLegInfo.setMarketId(betLeg.getMarketId());
@@ -34,19 +34,18 @@ class BetAssembler {
     }
 
     static Bet toBet(BetRequestInfo betRequestInfo) {
-        Bet bet = new Bet();
+        var bet = new Bet();
         bet.setExternalId(betRequestInfo.getExternalId());
         bet.setStake(betRequestInfo.getStake());
         bet.setState(BetState.ATTEMPTED);
         var betLegInfos = betRequestInfo.getBetLegInfos();
-        for (int i = 0; i < betLegInfos.size(); i++) {
+        for (int i = 0; i < betLegInfos.size(); i++)
             bet.addLeg(createBegLeg(betLegInfos.get(i), i));
-        }
         return bet;
     }
 
     private static BetLeg createBegLeg(BetLegInfo betLegInfo, int i) {
-        BetLeg betLeg = new BetLeg(i);
+        var betLeg = new BetLeg(i);
         betLeg.setEventId(betLegInfo.getEventId());
         betLeg.setMarketId(betLegInfo.getMarketId());
         betLeg.setSelectionId(betLegInfo.getSelectionId());

@@ -2,6 +2,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.5.1</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+
 	<groupId>com.igt.ww.betcapture</groupId>
 	<artifactId>betcapture</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
@@ -14,11 +21,12 @@
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spring-boot.version>2.2.2.RELEASE</spring-boot.version>
-		<feign.version>10.7.0</feign.version>
-		<springdoc-openapi.version>1.2.22</springdoc-openapi.version>
-		<testcontainers.postgresql.version>1.12.4</testcontainers.postgresql.version>
-		<wiremock.version>2.25.1</wiremock.version>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<feign.version>11.2</feign.version>
+		<springdoc-openapi.version>1.5.9</springdoc-openapi.version>
+		<testcontainers.postgresql.version>1.15.3</testcontainers.postgresql.version>
+		<wiremock.version>2.27.2</wiremock.version>
+		<commons-logging.version>1.2</commons-logging.version>
 	</properties>
 
 	<modules>
@@ -31,17 +39,25 @@
 		<dependencies>
 
 			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-dependencies</artifactId>
-				<version>${spring-boot.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-
-			<dependency>
 				<groupId>com.igt.ww.betcapture</groupId>
 				<artifactId>api</artifactId>
 				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>io.github.openfeign</groupId>
+				<artifactId>feign-jackson</artifactId>
+				<version>${feign.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springdoc</groupId>
+				<artifactId>springdoc-openapi-webmvc-core</artifactId>
+				<version>${springdoc-openapi.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-logging</groupId>
+				<artifactId>commons-logging</artifactId>
+				<version>${commons-logging.version}</version>
 			</dependency>
 
 			<dependency>
@@ -52,6 +68,12 @@
 				<scope>test</scope>
 			</dependency>
 
+			<dependency>
+				<groupId>org.testcontainers</groupId>
+				<artifactId>postgresql</artifactId>
+				<version>${testcontainers.postgresql.version}</version>
+				<scope>test</scope>
+			</dependency>
 			<dependency>
 				<groupId>com.github.tomakehurst</groupId>
 				<artifactId>wiremock-jre8</artifactId>

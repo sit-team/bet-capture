@@ -29,7 +29,7 @@ class BetRepositoryIT {
 		var bet2 = betRepository.findById(bet.getId());
 
 		assertThat(bet2).isNotEmpty();
-		assertThat(bet2.get()).isEqualToComparingFieldByField(bet);
+		assertThat(bet2.get()).usingRecursiveComparison().isEqualTo(bet);
 	}
 
 	private Bet makeBet() {
@@ -50,28 +50,28 @@ class BetRepositoryIT {
 
 	@Test
 	void openBetsAreQueried() {
-		Bet bet = makeBet();
+		var bet = makeBet();
 		betRepository.save(bet);
 		betRepository.flush();
 
-		List<Bet> openBets = betRepository.findAllByState(BetState.OPEN);
+		var openBets = betRepository.findAllByState(BetState.OPEN);
 		assertThat(openBets).hasSize(1);
-		List<BetLeg> legs = openBets.get(0).getLegs();
+		var legs = openBets.get(0).getLegs();
 		assertThat(legs).hasSize(1);
 		assertThat(legs.get(0).getBet().getState()).isEqualTo(BetState.OPEN);
 	}
 
 	@Test
 	void betStateCountsAreQueried() {
-		Bet bet1 = makeBet();
+		var bet1 = makeBet();
 		betRepository.save(bet1);
 
-		Bet bet2 = makeBet();
+		var bet2 = makeBet();
 		betRepository.save(bet2);
 
 		betRepository.flush();
 
-		SortedMap<BetState, Integer> stateCounts = betRepository.findBetStateCounts();
+		var stateCounts = betRepository.findBetStateCounts();
 		assertThat(stateCounts).containsExactly(entry(BetState.OPEN, 2));
 	}
 }
